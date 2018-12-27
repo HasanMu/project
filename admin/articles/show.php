@@ -7,17 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Admin || Dashboard</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="../../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.addons.css">
+  <link rel="stylesheet" href="../../public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../../public/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="../../public/vendors/css/vendor.bundle.addons.css">
   <!-- endinject -->
   <!-- plugin css for this page -->
-  <link rel="stylesheet" href="../../vendors/iconfonts/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../public/vendors/iconfonts/font-awesome/css/font-awesome.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../public/css/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="../../images/favicon.png" />
+  <link rel="shortcut icon" href="../../public/images/favicon.png" />
 </head>
 
 <body>
@@ -26,10 +26,10 @@
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
         <a class="navbar-brand brand-logo" href="index.html">
-          <img src="../../images/logo.svg" alt="logo" />
+          <img src="../../public/images/logo.svg" alt="logo" />
         </a>
         <a class="navbar-brand brand-logo-mini" href="index.html">
-          <img src="../../images/logo-mini.svg" alt="logo" />
+          <img src="../../public/images/logo-mini.svg" alt="logo" />
         </a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
@@ -147,7 +147,7 @@
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <span class="profile-text">Hello, Nama Admin !</span>
-              <img class="img-xs rounded-circle" src="../../images/faces/face1.jpg" alt="Profile image">
+              <img class="img-xs rounded-circle" src="../../public/images/faces/face1.jpg" alt="Profile image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <a class="dropdown-item p-0">
@@ -189,7 +189,7 @@
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="../../images/faces/face1.jpg" alt="profile image">
+                  <img src="../../public/images/faces/face1.jpg" alt="profile image">
                 </div>
                 <div class="text-wrapper">
                   <p class="profile-name">Nama Admin</p>
@@ -199,9 +199,9 @@
                   </div>
                 </div>
               </div>
-              <button class="btn btn-success btn-block">Profile
+              <a href="../profile/edit.php" class="btn btn-success btn-block">Profile
                 <i class="mdi mdi-plus"></i>
-              </button>
+              </a>
             </div>
           </li>
           <li class="nav-item">
@@ -293,13 +293,21 @@
                   <!-- <p class="card-description">
                     Basic form elements
                   </p> --> 
+                  <?php 
+                  $koneksi = mysqli_connect('localhost', 'root', '', 'project');
+                  $id = $_GET['id'];
+
+                  $query = "SELECT * FROM articles WHERE id='$id'";
+                  $execute = mysqli_query($koneksi, $query);
+                  $data = mysqli_fetch_array($execute);
+                  ?>
+                        <h1><?php echo $data['judul']; ?></h1>
                         <div class="form-group">
-                            <center><img src="https://www.smkassalaambandung.sch.id/img/logo-custom.png" height="200px;" alt=""></center>
+                            <center><img src="<?php echo $data['foto']; ?>" height="300px;" width="90%" alt=""></center>
                             <hr>
                         </div>
                         <div class="form-group">
-                        <center><h4>Nama artikel</h4></center>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                            <?php echo $data['content']; ?>
                         </div>
                       <center><a href="index.php" class="btn btn-light">Kembali</a></center>
                     </div>
@@ -330,17 +338,17 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-  <script src="../../vendors/js/vendor.bundle.base.js"></script>
-  <script src="../../vendors/js/vendor.bundle.addons.js"></script>
+  <script src="../../public/vendors/js/vendor.bundle.base.js"></script>
+  <script src="../../public/vendors/js/vendor.bundle.addons.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->
   <!-- End plugin js for this page-->
   <!-- inject:js -->
-  <script src="../../js/off-canvas.js"></script>
-  <script src="../../js/misc.js"></script>
+  <script src="../../public/js/off-canvas.js"></script>
+  <script src="../../public/js/misc.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="../../js/dashboard.js"></script>
+  <script src="../../public/js/dashboard.js"></script>
   <!-- End custom js for this page-->
 </body>
 

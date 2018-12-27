@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Admin || Dashboard</title>
+  <title>Admin || Profil</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="../../public/vendors/css/vendor.bundle.base.css">
@@ -219,7 +219,7 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.php">Articles</a>
+                  <a class="nav-link" href="../articles/index.php">Articles</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/category.php">Category</a>
@@ -283,65 +283,94 @@
       <div class="main-panel">
         <div class="content-wrapper">
           
-            <!-- Content -->
-            <center>
-        	<div class="col-md-10 grid-margin stretch-card"  style="text-align: left;">
+          <!-- Content -->
+          <!-- Form seacrh kalau perlu -->
+            <div class="col-md-6 grid-margin stretch-card"  style="text-align: left;">
               <!-- Form Edit Profile -->
               <div class="card">
                 <div class="card-body">
-                  <h3>Edit data artikel</h3>
+                  <h3>Profile</h3>
                   <br>
                   <!-- <p class="card-description">
                     Basic form elements
                   </p> -->
-                  <?php 
-                  $koneksi = mysqli_connect('localhost', 'root', '', 'project');
-                  $id = $_GET['id'];
 
-                  $query = "SELECT * FROM articles WHERE id='$id'";
-                  $execute = mysqli_query($koneksi, $query);
-                  $data = mysqli_fetch_array($execute);
-                  ?>
-                    <form 
-                      class="forms-sample" 
-                      method="post"
-                      enctype="multipart/form-data" 
-                      action="controller/editpro.php">
-                      
-                      <input type="hidden" name="id" value="<?php echo $id; ?>">
+                  <form 
+                    class="forms-sample" 
+                    method="post" 
+                    enctype="multipart/form-data" 
+                    action="{{route('home.update', ['id' => $data->id]) }}">
+                    
 
-                        <div class="form-group">
-                          <label for="exampleInputName1">Judul artikel</label>
-                          <input name="judul" type="text" class="form-control" id="exampleInputName1" placeholder="Judul artikel" value="<?php echo $data['judul']; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputName1">Content Artikel</label>
-                            <textarea name="content" id="editor"><?php echo $data['content']; ?></textarea>
-                        </div>
-                        <div class="form-group">
-                          <label for="exampleInputName1">Foto</label>
-                          <input name="foto" type="file" class="form-control" id="exampleInputName1" placeholder="Nama penulis">
-                          <?php 
-                            if ($data['foto']):
-                          ?>
-                            <br>
-                            <img src="<?php echo $data['foto']; ?>" style="width: 120px; height: 100px;">
-                          <?php 
-                            else:
-                              echo "<br>Tidak ada Foto!";
-                            endif;
-                          ?>
-                        </div>
-                      <button type="submit" class="btn btn-success mr-2">Edit data</button>
-                      <a href="index.php" class="btn btn-light">Kembali</a>
+                    <input type="hidden" name="_method" value="PUT">
 
-                    </form>
+                    
+                    <div class="form-group">
+                      <label for="exampleInputName1">Name</label>
+                      <input name="name" type="text" class="form-control" id="exampleInputName1" placeholder="Name">
                     </div>
-                  </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail3">Email address</label>
+                      <input name="email" type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <label>File upload</label>
+                      <!-- <input type="file" name="img[]" class="file-upload-default"> -->
+                      <br>
+                      <img src="{{asset('storage/'.$data->avatars)}}" height="100px">
+                      <p></p>
+                      <div class="input-group col-xs-12">
+                        
+                        <span class="input-group-append">
+                          <input name="image" class="file-upload-browser btn btn-info" type="file">
+                        </span>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-success mr-2">Save changes</button>
+                    <a href="{{route('home.index')}}" class="btn btn-light">Cancel</a>
+                    
+                  </form>
+                </div>
+              </div>
+
+              <!-- Form Security -->
+              <div class="card">
+                <div class="card-body">
+                  <h3>Security</h3>
+                  <br>
+                  <!-- <p class="card-description">
+                    Basic form elements
+                  </p> -->
+
+                  <form 
+                    class="forms-sample" 
+                    method="post" 
+                    enctype="multipart/form-data" 
+                    action="{{route('home.update', ['id' => $data->id]) }}">
+                    
+                    <input type="hidden" name="_method" value="PUT">
+                    <div class="form-group">
+                      <label for="exampleInputPassword4">Password</label>
+                      <input name="password" type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword4">New password</label>
+                      <input name="newpassword" type="password" class="form-control" id="exampleInputPassword4" placeholder="New Password">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword4">Confirm password</label>
+                      <input name="confirmpassword" type="password" class="form-control" id="exampleInputPassword4" placeholder="Confirm Password">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword4">&nbsp;</label>
+                      &nbsp;
+                    </div>
+                    <button type="submit" class="btn btn-success mr-2">Save changes</button>
+                    <a href="{{ route('home.index') }}" class="btn btn-light">Cancel</a>
+                  </form>
                 </div>
               </div>
             </div>
-            </center>
 
         </div>
         <!-- content-wrapper ends -->
@@ -376,15 +405,6 @@
   <!-- Custom js for this page-->
   <script src="../../public/js/dashboard.js"></script>
   <!-- End custom js for this page-->
-  <!-- Teks Editor -->
-  <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
-  <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
 </body>
 
 </html>
