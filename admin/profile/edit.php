@@ -1,3 +1,10 @@
+<?php session_start();
+if(isset($_SESSION['login'])):
+  $koneksi = mysqli_connect('localhost', 'root', '', 'project');
+  $query = "SELECT * FROM admin";
+  $execute = mysqli_query($koneksi, $query);
+  $data = mysqli_fetch_array($execute);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -146,8 +153,12 @@
           </li>
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <span class="profile-text">Hello, Nama Admin !</span>
-              <img class="img-xs rounded-circle" src="../../public/images/faces/face1.jpg" alt="Profile image">
+              <span class="profile-text">Hello, <?php echo $data['nama'];?> !</span>
+              <?php if($data['foto']): ?>
+                <img class="img-xs rounded-circle" src="<?php echo $data['foto']; ?>" alt="Profile image">
+              <?php else: ?>
+                <img class="img-xs rounded-circle" src="http://infobuzzer.net/wp-content/uploads/2018/02/user.png" alt="Profile image">
+              <?php endif; ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <a class="dropdown-item p-0">
@@ -189,10 +200,14 @@
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="../../public/images/faces/face1.jpg" alt="profile image">
+                  <?php if($data['foto']): ?>
+                    <img class="img-xs rounded-circle" src="<?php echo $data['foto']; ?>" alt="Profile image">
+                  <?php else: ?>
+                    <img class="img-xs rounded-circle" src="http://infobuzzer.net/wp-content/uploads/2018/02/user.png" alt="Profile image">
+                  <?php endif; ?>
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">Nama Admin</p>
+                  <p class="profile-name"><?php echo $data['nama'];?></p>
                   <div>
                     <small class="designation text-muted">Administrator</small>
                     <span class="status-indicator online"></span>
@@ -299,35 +314,38 @@
                     class="forms-sample" 
                     method="post" 
                     enctype="multipart/form-data" 
-                    action="{{route('home.update', ['id' => $data->id]) }}">
-                    
+                    action="controller/edit-profil.php">
 
-                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
 
                     
                     <div class="form-group">
                       <label for="exampleInputName1">Name</label>
-                      <input name="name" type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                      <input name="nama" value="<?php echo $data['nama']; ?>" type="text" class="form-control" id="exampleInputName1" placeholder="Name">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Email address</label>
-                      <input name="email" type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                      <input name="email" value="<?php echo $data['email']; ?>" type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
                     </div>
                     <div class="form-group">
                       <label>File upload</label>
                       <!-- <input type="file" name="img[]" class="file-upload-default"> -->
                       <br>
-                      <img src="{{asset('storage/'.$data->avatars)}}" height="100px">
+                      <?php if($data['foto']): ?>
+                        <img src="<?php echo $data['foto']; ?>" height="100px">
+                      <?php else: ?>
+                        N/A
+                      <?php endif; ?>
                       <p></p>
                       <div class="input-group col-xs-12">
                         
                         <span class="input-group-append">
-                          <input name="image" class="file-upload-browser btn btn-info" type="file">
+                          <input name="foto" class="file-upload-browser btn btn-info" type="file">
                         </span>
                       </div>
                     </div>
                     <button type="submit" class="btn btn-success mr-2">Save changes</button>
-                    <a href="{{route('home.index')}}" class="btn btn-light">Cancel</a>
+                    <a href="../index.php" class="btn btn-light">Cancel</a>
                     
                   </form>
                 </div>
@@ -408,3 +426,8 @@
 </body>
 
 </html>
+<?php
+else:
+  header("location:http://localhost/project/500/ErrorPage");
+endif;
+?>

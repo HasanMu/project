@@ -1,0 +1,14 @@
+ErrorDocument 404 /project/404.php
+ErrorDocument 401 /project/errors/401.php
+ErrorDocument 400 /project/errors/400.php
+ErrorDocument 403 /project/errors/403.php
+ErrorDocument 500 /project/errors/500.php
+
+RewriteEngine On
+RewriteRule ^auth/login$ /project/auth/login.php
+RewriteRule ^admin/home$ /project/admin/index.php
+RewriteRule ^admin/articles/home$ /project/admin/articles/home.php
+RewriteRule ^admin/articles/([0-9]+)/edit$ /project/admin/articles/edit.php?id=$1
+RewriteRule ^admin/articles/([0-9]+)/show$ /project/admin/articles/show.php?id=$1
+RewriteRule ^admin/articles/create$ /project/admin/articles/create.php
+RewriteRule ^500/ErrorPage$ /project/errors/500.php

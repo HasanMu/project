@@ -1,3 +1,10 @@
+<?php session_start();
+if(isset($_SESSION['login'])):
+  $koneksi = mysqli_connect('localhost', 'root', '', 'project');
+  $query = "SELECT * FROM admin";
+  $execute = mysqli_query($koneksi, $query);
+  $data = mysqli_fetch_array($execute);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -146,7 +153,7 @@
           </li>
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <span class="profile-text">Hello, Nama Admin !</span>
+              <span class="profile-text">Hello, <?php echo $data['nama']; ?>!</span>
               <img class="img-xs rounded-circle" src="../../public/images/faces/face1.jpg" alt="Profile image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
@@ -192,7 +199,7 @@
                   <img src="../../public/images/faces/face1.jpg" alt="profile image">
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">Nama Admin</p>
+                  <p class="profile-name"><?php echo $data['nama']; ?></p>
                   <div>
                     <small class="designation text-muted">Administrator</small>
                     <span class="status-indicator online"></span>
@@ -313,7 +320,7 @@
                           <input type="file" name="foto" class="form-control" id="exampleInputName1">
                         </div>
                       <button type="submit" class="btn btn-success mr-2">Tambah data</button>
-                      <a href="index.php" class="btn btn-light">Kembali</a>
+                      <a href="http://localhost/project/admin/articles/home" class="btn btn-light">Kembali</a>
 
                     </form>
                     </div>
@@ -368,3 +375,8 @@
 </body>
 
 </html>
+<?php
+else:
+  header("location:http://localhost/project/500/ErrorPage");
+endif;
+?>

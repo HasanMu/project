@@ -1,3 +1,10 @@
+<?php session_start();
+if(isset($_SESSION['login'])):
+  $koneksi = mysqli_connect('localhost', 'root', '', 'project');
+  $query = "SELECT * FROM admin";
+  $execute = mysqli_query($koneksi, $query);
+  $data = mysqli_fetch_array($execute);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,19 +12,19 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Admin || Dashboard</title>
+  <title>Admin || Articles</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="../../public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="../../public/vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="../../public/vendors/css/vendor.bundle.addons.css">
+  <link rel="stylesheet" href="http://localhost/project/public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="http://localhost/project/public/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="http://localhost/project/public/vendors/css/vendor.bundle.addons.css">
   <!-- endinject -->
   <!-- plugin css for this page -->
-  <link rel="stylesheet" href="../../public/vendors/iconfonts/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://localhost/project/public/vendors/iconfonts/font-awesome/css/font-awesome.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="../../public/css/style.css">
+  <link rel="stylesheet" href="http://localhost/project/public/css/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="../../public/images/favicon.png" />
+  <link rel="shortcut icon" href="http://localhost/project/public/images/favicon.png" />
 </head>
 
 <body>
@@ -26,10 +33,10 @@
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
         <a class="navbar-brand brand-logo" href="index.html">
-          <img src="../../public/images/logo.svg" alt="logo" />
+          <img src="http://localhost/project/public/images/logo.svg" alt="logo" />
         </a>
         <a class="navbar-brand brand-logo-mini" href="index.html">
-          <img src="../../public/images/logo-mini.svg" alt="logo" />
+          <img src="http://localhost/project/public/images/logo-mini.svg" alt="logo" />
         </a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
@@ -146,8 +153,8 @@
           </li>
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <span class="profile-text">Hello, Nama Admin !</span>
-              <img class="img-xs rounded-circle" src="../../public/images/faces/face1.jpg" alt="Profile image">
+              <span class="profile-text">Hello, <?php echo $data['nama']; ?>!</span>
+              <img class="img-xs rounded-circle" src="http://localhost/project/public/images/faces/face1.jpg" alt="Profile image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <a class="dropdown-item p-0">
@@ -189,10 +196,10 @@
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="../../public/images/faces/face1.jpg" alt="profile image">
+                  <img src="http://localhost/project/public/images/faces/face1.jpg" alt="profile image">
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">Nama Admin</p>
+                  <p class="profile-name"><?php echo $data['nama']; ?></p>
                   <div>
                     <small class="designation text-muted">Administrator</small>
                     <span class="status-indicator online"></span>
@@ -205,7 +212,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../index.php">
+            <a class="nav-link" href="http://localhost/project/admin/home">
               <i class="menu-icon mdi mdi-television"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -219,10 +226,7 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="/admin/articles/index.php">Articles</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/category.php">Category</a>
+                  <a class="nav-link" href="http://localhost/project/admin/articles/home">Articles</a>
                 </li>
               </ul>
             </div>
@@ -289,9 +293,9 @@
               <div class="card">
                 <div class="card-body">
                   <h2>Data artikel</h2>
-                  <a href="create.php" class="btn btn-outline-primary"> Tambah data </a>
+                  <a href="http://localhost/project/admin/articles/create" class="btn btn-outline-primary"> Tambah data </a>
                   <p></p>
-                  <form action="{{route('class.index')}}">
+                  <form action="controller/search.php">
                   
                   <div class="form-group">  
                     <div class="input-group col-xs-10">
@@ -318,12 +322,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <?php $no = 0; ?>
                         <?php 
                           $koneksi = mysqli_connect("localhost", "root", "", "project");
                           $query = "SELECT * FROM articles";
                           $result = mysqli_query($koneksi, $query);
 
+                          $no = 0;
                           while($data = mysqli_fetch_array($result)){
                           $no++;
                         ?>
@@ -334,10 +338,10 @@
                           <td><img src="<?php echo $data['foto']; ?>" style="width: 120px; height: 100px;" alt="<?php echo $data['judul']; ?>"></td>
                           <td colspan="3">
                           	<a 
-                              href="edit.php?id=<?php echo $data['id']; ?>"
+                              href="http://localhost/project/admin/articles/<?php echo $data['id']; ?>/edit"
                               class="btn btn-outline-primary"> Edit </a>
                           	<a 
-                              href="show.php?id=<?php echo $data['id']; ?>" 
+                              href="http://localhost/project/admin/articles/<?php echo $data['id']; ?>/show" 
                               class="btn btn-outline-info"> Info </a>
                           	<a 
                               href="{{ route('class.destroy', ['id' => $data->id]) }}" 
@@ -389,18 +393,23 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-  <script src="../../public/vendors/js/vendor.bundle.base.js"></script>
-  <script src="../../public/vendors/js/vendor.bundle.addons.js"></script>
+  <script src="http://localhost/project/public/vendors/js/vendor.bundle.base.js"></script>
+  <script src="http://localhost/project/public/vendors/js/vendor.bundle.addons.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->
   <!-- End plugin js for this page-->
   <!-- inject:js -->
-  <script src="../../public/js/off-canvas.js"></script>
-  <script src="../../public/js/misc.js"></script>
+  <script src="http://localhost/project/public/js/off-canvas.js"></script>
+  <script src="http://localhost/project/public/js/misc.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="../../public/js/dashboard.js"></script>
+  <script src="http://localhost/project/public/js/dashboard.js"></script>
   <!-- End custom js for this page-->
 </body>
 
 </html>
+<?php
+else:
+  header("location:http://localhost/project/500/ErrorPage");
+endif;
+?>
