@@ -176,7 +176,7 @@ if(isset($_SESSION['login'])):
               <a href="" class="dropdown-item">
                 Change Password
               </a>
-              <a href="" class="dropdown-item">
+              <a href="http://localhost/project/auth/login" class="dropdown-item">
                 Sign Out
               </a>
             </div>
@@ -206,7 +206,7 @@ if(isset($_SESSION['login'])):
                   </div>
                 </div>
               </div>
-              <a href="../profile/edit.php" class="btn btn-success btn-block">Profile
+              <a href="http://localhost/project/admin/profile/edit" class="btn btn-success btn-block">Profile
                 <i class="mdi mdi-plus"></i>
               </a>
             </div>
@@ -226,10 +226,7 @@ if(isset($_SESSION['login'])):
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.php">Articles</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/category.php">Category</a>
+                  <a class="nav-link" href="http://localhost/project/admin/articles/home">Articles</a>
                 </li>
               </ul>
             </div>

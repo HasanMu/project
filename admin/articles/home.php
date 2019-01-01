@@ -176,7 +176,7 @@ if(isset($_SESSION['login'])):
               <a href="" class="dropdown-item">
                 Change Password
               </a>
-              <a href="" class="dropdown-item">
+              <a href="http://localhost/project/auth/login" class="dropdown-item">
                 Sign Out
               </a>
             </div>
@@ -206,7 +206,7 @@ if(isset($_SESSION['login'])):
                   </div>
                 </div>
               </div>
-              <a href="../profile/edit.php" class="btn btn-success btn-block">Profile
+              <a href="http://localhost/project/admin/profile/edit" class="btn btn-success btn-block">Profile
                 <i class="mdi mdi-plus"></i>
               </a>
             </div>
@@ -295,7 +295,7 @@ if(isset($_SESSION['login'])):
                   <h2>Data artikel</h2>
                   <a href="http://localhost/project/admin/articles/create" class="btn btn-outline-primary"> Tambah data </a>
                   <p></p>
-                  <form action="controller/search.php">
+                  <form method="POST" action="">
                   
                   <div class="form-group">  
                     <div class="input-group col-xs-10">
@@ -307,9 +307,9 @@ if(isset($_SESSION['login'])):
                       <span class="input-group-append">
                         <button 
                         class="file-upload-browse btn btn-info" 
-                        type="submit"><i class="fa fa-search"></i></button>
+                        type="submit" name="cari"><i class="fa fa-search"></i></button>
                       </span>
-                    </form>
+                  </form>
                   <div class="table-responsive">
                     <table class="table table-hover">
                       <thead>
@@ -324,6 +324,34 @@ if(isset($_SESSION['login'])):
                       <tbody>
                         <?php 
                           $koneksi = mysqli_connect("localhost", "root", "", "project");
+                          if(isset($_POST['cari'])):
+                            $filter = $_POST['filter'];
+                            $query = "SELECT * FROM articles WHERE judul LIKE '%$filter%'";
+                            $result = mysqli_query($koneksi, $query);
+                            $no = 0;
+                            while($data = mysqli_fetch_array($result)){
+                            $no++;
+                        ?>
+                        <tr>
+                          <td><?php echo $no; ?></td>
+                          <td><?php echo $data['judul']; ?></td>
+                          <td><?php echo substr($data['content'], 0, 50); ?></td>
+                          <td><img src="<?php echo $data['foto']; ?>" style="width: 120px; height: 100px;" alt="<?php echo $data['judul']; ?>"></td>
+                          <td colspan="3">
+                            <a 
+                              href="http://localhost/project/admin/articles/<?php echo $data['id']; ?>/edit"
+                              class="btn btn-outline-primary"> Edit </a>
+                            <a 
+                              href="http://localhost/project/admin/articles/<?php echo $data['id']; ?>/show" 
+                              class="btn btn-outline-info"> Info </a>
+                            <a 
+                              href="{{ route('class.destroy', ['id' => $data->id]) }}" 
+                              class="btn btn-outline-danger"> Delete </a>
+                          </td>
+                        </tr>
+                        <?php
+                            }
+                          else:
                           $query = "SELECT * FROM articles";
                           $result = mysqli_query($koneksi, $query);
 
@@ -334,7 +362,7 @@ if(isset($_SESSION['login'])):
                         <tr>
                           <td><?php echo $no; ?></td>
                           <td><?php echo $data['judul']; ?></td>
-                          <td><?php echo $data['content']; ?></td>
+                          <td><?php echo substr($data['content'], 0, 20)."..."; ?></td>
                           <td><img src="<?php echo $data['foto']; ?>" style="width: 120px; height: 100px;" alt="<?php echo $data['judul']; ?>"></td>
                           <td colspan="3">
                           	<a 
@@ -348,18 +376,18 @@ if(isset($_SESSION['login'])):
                               class="btn btn-outline-danger"> Delete </a>
                           </td>
                         </tr>
-                        <?php } ?>
+                        <?php } endif;?>
                       </tbody>
                       <tfoot>
 		                <br>
                     <tr>
 		                    <td colspan="10">
-                                <a href="<?php echo BASE_URL.'index.php?page=1'; ?>" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                                <a href="<?php echo BASE_URL."index.php?page=$total_pages"; ?>" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
+                          <a href="<?php echo BASE_URL.'index.php?page=1'; ?>" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                          </a>
+                          <a href="<?php echo BASE_URL."index.php?page=$total_pages"; ?>" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                          </a>
 		                    </td>
 		                </tr>
 		            </tfoot>

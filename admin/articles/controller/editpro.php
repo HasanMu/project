@@ -14,10 +14,14 @@
 	{
 		$ubah = "UPDATE articles SET judul='$a', content='$b', foto='$path' WHERE id='$id'";
 		mysqli_query($koneksi, $ubah);
-		header("location:../index.php");
+		header("location:http://localhost/project/admin/articles/home");
+	} elseif(!move_uploaded_file($tmp_name, $loc)) {
+		$ubah = "UPDATE articles SET judul='$a', content='$b' WHERE id='$id'";
+		mysqli_query($koneksi, $ubah);
+		header("location:http://localhost/project/admin/articles/home");
 	} else {
-		// echo "<script>alert('maaf data tidak tersimpan kedalam database!')</script>";
-		header("location:../edit.php?id=$id");
+		header("location:http://localhost/project/admin/articles/$id/edit");
 	}
+
 	
 ?>

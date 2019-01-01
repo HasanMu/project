@@ -1,4 +1,4 @@
-ErrorDocument 404 /project/404.php
+ErrorDocument 404 /project/errors/404.php
 ErrorDocument 401 /project/errors/401.php
 ErrorDocument 400 /project/errors/400.php
 ErrorDocument 403 /project/errors/403.php
@@ -11,4 +11,14 @@ RewriteRule ^admin/articles/home$ /project/admin/articles/home.php
 RewriteRule ^admin/articles/([0-9]+)/edit$ /project/admin/articles/edit.php?id=$1
 RewriteRule ^admin/articles/([0-9]+)/show$ /project/admin/articles/show.php?id=$1
 RewriteRule ^admin/articles/create$ /project/admin/articles/create.php
+
 RewriteRule ^500/ErrorPage$ /project/errors/500.php
+RewriteRule ^404/ErrorPage$ /project/errors/404.php
+RewriteRule ^400/ErrorPage$ /project/errors/400.php
+RewriteRule ^401/ErrorPage$ /project/errors/401.php
+RewriteRule ^403/ErrorPage$ /project/errors/403.php
+
+RewriteRule ^admin/profile/edit$ /project/admin/profile/edit.php
+RewriteRule ^admin/articles/home?filter=([0-9])+$ /project/admin/articles/home?filter=wew&cari=
+
+RewriteRule ^admin/articles/controller/editpro$ /project/admin/articles/controller/editpro.php

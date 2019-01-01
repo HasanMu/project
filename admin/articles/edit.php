@@ -176,7 +176,7 @@ if(isset($_SESSION['login'])):
               <a href="" class="dropdown-item">
                 Change Password
               </a>
-              <a href="" class="dropdown-item">
+              <a href="http://localhost/project/auth/login" class="dropdown-item">
                 Sign Out
               </a>
             </div>
@@ -206,7 +206,7 @@ if(isset($_SESSION['login'])):
                   </div>
                 </div>
               </div>
-              <a href="../profile/edit.php" class="btn btn-success btn-block">Profile
+              <a href="http://localhost/project/admin/profile/edit" class="btn btn-success btn-block">Profile
                 <i class="mdi mdi-plus"></i>
               </a>
             </div>
@@ -310,7 +310,7 @@ if(isset($_SESSION['login'])):
                       class="forms-sample" 
                       method="post"
                       enctype="multipart/form-data" 
-                      action="controller/editpro.php">
+                      action="http://localhost/project/admin/articles/controller/editpro">
                       
                       <input type="hidden" name="id" value="<?php echo $id; ?>">
 
