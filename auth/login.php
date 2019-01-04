@@ -1,5 +1,9 @@
 <?php 
 session_start();
+
+if(isset($_SESSION['login'])):
+  echo "<script>history.back();</script>";
+else:
 unset($_SESSION['login']); ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,3 +102,4 @@ unset($_SESSION['login']); ?>
 </body>
 
 </html>
+<?php endif; ?>

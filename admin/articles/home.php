@@ -154,7 +154,7 @@ if(isset($_SESSION['login'])):
           <li class="nav-item dropdown d-none d-xl-inline-block">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <span class="profile-text">Hello, <?php echo $data['nama']; ?>!</span>
-              <img class="img-xs rounded-circle" src="http://localhost/project/public/images/faces/face1.jpg" alt="Profile image">
+              <img class="img-xs rounded-circle" src="../profile/<?php echo $data['foto']; ?>" alt="Profile image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <a class="dropdown-item p-0">
@@ -176,7 +176,7 @@ if(isset($_SESSION['login'])):
               <a href="" class="dropdown-item">
                 Change Password
               </a>
-              <a href="http://localhost/project/auth/login" class="dropdown-item">
+              <a href="http://localhost/project/auth/logout" class="dropdown-item">
                 Sign Out
               </a>
             </div>
@@ -196,7 +196,7 @@ if(isset($_SESSION['login'])):
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="http://localhost/project/public/images/faces/face1.jpg" alt="profile image">
+                  <img src="../profile/<?php echo $data['foto']; ?>" alt="profile image">
                 </div>
                 <div class="text-wrapper">
                   <p class="profile-name"><?php echo $data['nama']; ?></p>
@@ -345,7 +345,7 @@ if(isset($_SESSION['login'])):
                               href="http://localhost/project/admin/articles/<?php echo $data['id']; ?>/show" 
                               class="btn btn-outline-info"> Info </a>
                             <a 
-                              href="{{ route('class.destroy', ['id' => $data->id]) }}" 
+                              href="http://localhost/project/admin/articles/<?php echo $data['id']; ?>/delete" 
                               class="btn btn-outline-danger"> Delete </a>
                           </td>
                         </tr>
@@ -372,7 +372,7 @@ if(isset($_SESSION['login'])):
                               href="http://localhost/project/admin/articles/<?php echo $data['id']; ?>/show" 
                               class="btn btn-outline-info"> Info </a>
                           	<a 
-                              href="{{ route('class.destroy', ['id' => $data->id]) }}" 
+                              href="http://localhost/project/admin/articles/<?php echo $data['id']; ?>/delete" 
                               class="btn btn-outline-danger"> Delete </a>
                           </td>
                         </tr>
@@ -438,6 +438,6 @@ if(isset($_SESSION['login'])):
 </html>
 <?php
 else:
-  header("location:http://localhost/project/500/ErrorPage");
+  header("location:http://localhost/project/404/ErrorPage");
 endif;
 ?>

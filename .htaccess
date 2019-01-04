@@ -10,7 +10,9 @@ RewriteRule ^admin/home$ /project/admin/index.php
 RewriteRule ^admin/articles/home$ /project/admin/articles/home.php
 RewriteRule ^admin/articles/([0-9]+)/edit$ /project/admin/articles/edit.php?id=$1
 RewriteRule ^admin/articles/([0-9]+)/show$ /project/admin/articles/show.php?id=$1
+RewriteRule ^admin/articles/([0-9]+)/delete$ /project/admin/articles/controller/delete.php?id=$1
 RewriteRule ^admin/articles/create$ /project/admin/articles/create.php
+RewriteRule ^auth/logout$ /project/auth/logout.php
 
 RewriteRule ^500/ErrorPage$ /project/errors/500.php
 RewriteRule ^404/ErrorPage$ /project/errors/404.php

@@ -157,7 +157,7 @@ if(isset($_SESSION['login'])):
               <?php if($data['foto']): ?>
                 <img class="img-xs rounded-circle" src="<?php echo $data['foto']; ?>" alt="Profile image">
               <?php else: ?>
-                <img class="img-xs rounded-circle" src="http://infobuzzer.net/wp-content/uploads/2018/02/user.png" alt="Profile image">
+                <img class="img-xs rounded-circle" src="<?php echo $data['foto']; ?>" alt="Profile image">
               <?php endif; ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
@@ -180,7 +180,7 @@ if(isset($_SESSION['login'])):
               <a href="" class="dropdown-item">
                 Change Password
               </a>
-              <a href="http://localhost/project/auth/login" class="dropdown-item">
+              <a href="http://localhost/project/auth/logout" class="dropdown-item">
                 Sign Out
               </a>
             </div>
@@ -203,7 +203,7 @@ if(isset($_SESSION['login'])):
                   <?php if($data['foto']): ?>
                     <img class="img-xs rounded-circle" src="<?php echo $data['foto']; ?>" alt="Profile image">
                   <?php else: ?>
-                    <img class="img-xs rounded-circle" src="http://infobuzzer.net/wp-content/uploads/2018/02/user.png" alt="Profile image">
+                    <img class="img-xs rounded-circle" src="<?php echo $data['foto']; ?>" alt="Profile image">
                   <?php endif; ?>
                 </div>
                 <div class="text-wrapper">
@@ -425,6 +425,6 @@ if(isset($_SESSION['login'])):
 </html>
 <?php
 else:
-  header("location:http://localhost/project/500/ErrorPage");
+  header("location:http://localhost/project/404/ErrorPage");
 endif;
 ?>
