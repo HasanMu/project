@@ -5,6 +5,7 @@ ErrorDocument 403 /project/errors/403.php
 ErrorDocument 500 /project/errors/500.php
 
 RewriteEngine On
+
 RewriteRule ^auth/login$ /project/auth/login.php
 RewriteRule ^admin/home$ /project/admin/index.php
 RewriteRule ^admin/articles/home$ /project/admin/articles/home.php

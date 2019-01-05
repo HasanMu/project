@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Des 2018 pada 04.57
+-- Waktu pembuatan: 05 Jan 2019 pada 06.54
 -- Versi server: 10.1.30-MariaDB
 -- Versi PHP: 7.2.2
 
@@ -31,9 +31,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `nama` varchar(191) NOT NULL,
+  `foto` varchar(191) NOT NULL,
   `email` varchar(191) NOT NULL,
-  `password` varchar(191) NOT NULL
+  `password` varchar(191) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`id`, `nama`, `foto`, `email`, `password`, `created_at`, `updated_at`) VALUES
+(1, 'Admin Hebat', 'images/V7OCzbatyVs5MhRWRNPaSUfVh7EeqrNwJsk0hkeP.jpeg', 'admin@hebat.com', 'terserah', '2019-01-04 00:41:28', '2019-01-03 18:41:28');
 
 -- --------------------------------------------------------
 
@@ -45,21 +55,22 @@ CREATE TABLE `articles` (
   `id` int(11) NOT NULL,
   `judul` varchar(191) DEFAULT NULL,
   `content` text,
-  `foto` varchar(191) NOT NULL
+  `foto` varchar(191) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `articles`
 --
 
-INSERT INTO `articles` (`id`, `judul`, `content`, `foto`) VALUES
-(1, 'SMK Assalaam', '<p>Lorem ipsum</p>', 'images/bgrpl.JPG'),
-(2, 'SMK Assalaam II', '<p><strong>Lorem Ipsum</strong></p>', 'images/software.jpg'),
-(3, 'SMK Assalaam III', '<p><i>Lorem Ipsum</i></p>', 'images/no1.png'),
-(4, 'SMK Assalaam IV', '<blockquote><p>Lorem Ipsum</p></blockquote>', 'images/rpl.JPG'),
-(5, 'SMK Assalaam V', '<p>Lorem Ipsum..</p>', 'images/lamp.jpg'),
-(6, 'SMK Assalaam VI', '<p>hehe</p>', 'images/lamp.png'),
-(7, 'SMK Assalaam VII', '<p>Aku cinta dia</p>', 'images/rpl.JPG');
+INSERT INTO `articles` (`id`, `judul`, `content`, `foto`, `created_at`, `updated_at`) VALUES
+(1, 'SMK Assalaam', '<p>Lorem ipsum</p>', 'images/bgrpl.JPG', '2019-01-04 07:27:41', '2019-01-04 01:27:41'),
+(2, 'SMK Assalaam II', '<p><strong>Lorem Ipsum</strong></p>', 'images/software.jpg', '2019-01-04 00:27:59', '0000-00-00 00:00:00'),
+(3, 'SMK Assalaam III', '<p><i>Lorem Ipsum</i></p>', 'images/no1.png', '2019-01-04 00:27:59', '0000-00-00 00:00:00'),
+(4, 'SMK Assalaam IV', '<blockquote><p>Lorem Ipsum</p></blockquote>', 'images/rpl.JPG', '2019-01-04 00:27:59', '0000-00-00 00:00:00'),
+(5, 'SMK Assalaam V', '<p>Lorem Ipsum..</p>', 'images/lamp.jpg', '2019-01-04 00:27:59', '0000-00-00 00:00:00'),
+(6, 'SMK Assalaam VI', '<p>hehe</p>', 'images/lamp.png', '2019-01-04 00:27:59', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -86,13 +97,13 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT untuk tabel `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
